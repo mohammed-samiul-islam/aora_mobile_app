@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+# Aora
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native (Expo) mobile app for sharing short videos, backed by Appwrite for auth, database and file storage.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Sign up / sign in / sign out (Appwrite accounts)
+- Home feed with all posts and a "Trending" carousel of latest posts
+- Search videos (`/search/[query]`)
+- Create screen: pick a video and thumbnail (expo-image-picker) and upload to Appwrite storage
+- Profile screen showing the user's own posts
+- Bookmark tab
+- File-based routing with Expo Router; styling with NativeWind
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+React Native · Expo (Router, AV, Image Picker) · NativeWind (Tailwind) · Appwrite (`react-native-appwrite`) · React Native Animatable
 
-   ```bash
-    npx expo start
-   ```
+## Project Structure
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/
+  (auth)/        # sign-in, sign-up
+  (tabs)/        # home, create, bookmark, profile
+  search/[query].jsx
+components/      # VideoCard, Trending, SearchInput, FormField, CustomButton, EmptyState, InfoBox
+context/GlobalProvider.js
+lib/appwrite.js  # Appwrite config + API helpers
+lib/useAppwrite.js
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-## Learn more
+```bash
+npm install
+npx expo start        # or: npm start
+npm run android       # / npm run ios / npm run web
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Other scripts: `npm test` (Jest), `npm run lint`.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Appwrite settings (endpoint, project ID, database/collection/storage IDs) are configured directly in `lib/appwrite.js`; update them to point at your own Appwrite project.
